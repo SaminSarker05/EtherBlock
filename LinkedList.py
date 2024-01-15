@@ -23,20 +23,12 @@ class LinkedList:
       self.head = new_node
       self.tail = new_node
     else:
-      self.tail.new_node = new_node
+      self.tail.next_node = new_node
       self.tail = new_node
 
   def printList(self):
     cursor = self.head
-    print(cursor.next_node)
     while (cursor):
-      print(cursor)
+      print(cursor, end=" -> ")
       cursor = cursor.next_node
-    
-
-
-chain = LinkedList()
-chain.append(1)
-chain.append(2)
-
-chain.printList()
+    print()
