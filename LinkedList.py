@@ -1,6 +1,6 @@
 '''
-- a singly linked list class that connects nodes
-- optimized for frequent insertions
+A singly linked list class that connects nodes
+and is optimized for frequent insertions
 '''
 
 class Node:
@@ -16,6 +16,10 @@ class LinkedList:
   def __init__(self):
     self.head = None
     self.tail = None
+    self.n = 0
+  
+  def __len__(self):
+    return self.n
   
   def append(self, data):
     new_node = Node(data)
@@ -26,9 +30,14 @@ class LinkedList:
       self.tail.next_node = new_node
       self.tail = new_node
 
+    self.n += 1
+
   def printList(self):
     cursor = self.head
     while (cursor):
       print(cursor, end=" -> ")
       cursor = cursor.next_node
     print()
+
+  def last(self):
+    return self.tail
