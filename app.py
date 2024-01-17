@@ -16,7 +16,11 @@ def mineEther():
 
   block = etherChain.new_block(new_proof, previous_hash)
 
-  response = {'message': f'new block {block.index} forged'}
+  response = {
+    'message': f'new block {block.index} forged',
+    'proof': str(new_proof),
+    'previous_hash': str(previous_hash),
+  }
   return response
 
 
@@ -59,8 +63,10 @@ def transaction():
       return 'Missing Values', 400
   
   index = etherChain.new_transaction(data['sender'], data['recipient'], data['amount'])
-  response = {'message': f'transaction will be added to ether block {index}'}
-  return response
+  response = {
+    'message': f'transaction will be added to ether block {index}'
+  }
+  return jsonify(response)
 
 
 
