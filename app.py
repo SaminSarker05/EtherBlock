@@ -26,10 +26,8 @@ def mineEther():
 
 @app.route('/chain', methods=['GET'])
 def seeChain():
-  etherChain.chain.printList()
 
   blocks = []
-
   for node in etherChain.chain:
     block = node.data
     transactions = block.transactions
@@ -50,7 +48,7 @@ def seeChain():
     'chain': blocks,
     'length': len(etherChain)
   }
-  return jsonify(response)
+  return jsonify(response), 200
 
 
 @app.route('/new', methods=['POST'])
@@ -69,7 +67,46 @@ def transaction():
   return jsonify(response)
 
 
+@app.route('/register', methods=['POST'])
+def register():
+  data = request.get_json()
+  nodes = data.get('nodes')
+  if nodes is None:
+    return "Error", 400
+  
+  for node in nodes:
+    etherChain.register_node(node)
+
+  response = {
+    'message': "new nodes added",
+    'nodes': nodes
+  }
+  return jsonify(response)
+
+
+@app.route('/resolve', methods=['GET'])
+def consensus():
+  change = etherChain.resolve()
+  message = "not changed"
+  if change:
+    message = "chain was changed"
+  
+  response = {
+    'message': message
+  }
+
+  return jsonify(response), 200
+  
+
+import sys 
 
 
 if __name__ == '__main__':
-    app.run(debug = True)
+  port = 5000
+  if len(sys.argv) > 1:
+    try:
+      port = int(sys.argv[1])
+    except ValueError:
+      print("invalid port")
+
+  app.run(debug = True, port = port)

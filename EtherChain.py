@@ -4,6 +4,7 @@ from uuid import uuid4
 import hashlib
 import json
 from urllib.parse import urlparse
+import requests
 
 class EtherBlock:
   def __init__(self, index, transactions, proof, previous_hash):
@@ -30,9 +31,7 @@ class EtherChain:
     return len(self.chain)
 
   def register_node(self, address):
-    parsed_url = urlparse(address)
-    self.nodes.add(parsed_url)
-
+    self.nodes.add(address)
 
   def new_transaction(self, sender, recipient, amount):
     data = {
@@ -41,7 +40,7 @@ class EtherChain:
       'amount': amount
     }
     self.transactions.append(data)
-    print(self.last_block())
+    # print(self.last_block())
     return self.last_block().data.index + 1
 
 
@@ -79,14 +78,13 @@ class EtherChain:
     return guess_hash[:4] == "0000"
 
   def valid_chain(self, chain):
-    last_block = chain.head
+    last_block = chain[0]
     curr = 1
-    curr_node = chain.head.next_node
 
     while curr < len(chain):
       # chain is a linked list
-
-      if curr_node.data.previous_hash != self.hash(last_block.data.proof):
+      block = EtherBlock(last_block['index'], last_block['transactions'], last_block['proof'], last_block['previous_hash'],)
+      if chain[curr]['previous_hash'] != self.hash(block):
         return False
       
       last_block = curr_node
@@ -97,10 +95,27 @@ class EtherChain:
     return True
 
 
-  # def consensus_algo(self):
-  #   neighbors = self.nodes
+  def resolve(self):
+    neighbors = self.nodes
+    found = None
+
+    print(neighbors)
     
-  #   for node in neighbors:
-  #     response = requests.get(f'http://{node}/chain')
-  #     if response.status_code == 200:
-  #       length = response.
+    for node in neighbors:
+      print("HELLO")
+      print(node)
+      print("monkey")
+      response = requests.get(f'{node}/chain')
+      if response.status_code == 200:
+        length = response.json()['length']
+        chain = response.json()['chain']
+        print(length, chain)
+
+        if length > len(self) and self.valid_chain(chain):
+          found = chain
+      
+    if found:
+      self.chain = found
+      return True
+    
+    return False
