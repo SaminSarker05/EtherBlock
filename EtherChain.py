@@ -2,6 +2,7 @@ from LinkedList import LinkedList
 from time import time
 from uuid import uuid4
 import hashlib
+import json
 
 class EtherBlock:
   def __init__(self, index, transactions, proof, previous_hash):
@@ -10,10 +11,10 @@ class EtherBlock:
     self.transactions = transactions
     self.proof = proof
     self.previous_hash = previous_hash
-  
-  def __str__(self):
-    return f"Index: {self.index}, Timestamp: {self.timestamp}, Transactions: {self.transactions}, Proof: {self.proof}, Previous Hash: {self.previous_hash}"
 
+  def __str__(self):
+  
+    return f"Index: {self.index}, Timestamp: {self.timestamp}, Transactions: {self.transactions}, Proof: {self.proof}, Previous Hash: {self.previous_hash}"
 
 class EtherChain:
   def __init__(self):
@@ -42,7 +43,15 @@ class EtherChain:
     return self.chain.last()
 
   def hash(self, block):
-    return hashlib.sha256(str(block)).hexdigest()
+    data = {
+      'index': str(block.index),
+      'timestamp': str(block.timestamp),
+      'transactions': str(block.transactions),
+      'proof': str(block.proof),
+      'previous_hash': str(block.previous_hash)
+    }
+    block_string = json.dumps(data, sort_keys=True).encode()
+    return hashlib.sha256(block_string).hexdigest()
   
   def poW(self, last_proof):
     proof = 0
@@ -53,7 +62,7 @@ class EtherChain:
   
   def poW_validate(self, last_proof, proof):
     test = f'{last_proof}{proof}'.encode()
-    guess_hash = hashlib.sha256(guess).hexdigest()
+    guess_hash = hashlib.sha256(test).hexdigest()
     return guess_hash[:4] == "0000"
 
 test = EtherChain()

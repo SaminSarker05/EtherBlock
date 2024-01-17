@@ -35,7 +35,7 @@ class LinkedList:
   def printList(self):
     cursor = self.head
     while (cursor):
-      print(cursor, end=" -> ")
+      print(cursor.data, end=" -> ")
       cursor = cursor.next_node
     print()
 

@@ -1,5 +1,5 @@
 from EtherChain import *
-from flask import Flask, request
+from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 etherChain = EtherChain()
@@ -22,7 +22,8 @@ def mineEther():
 
 @app.route('/chain', methods=['GET'])
 def seeChain():
-  return "chain..."
+  etherChain.chain.printList()
+  return "Hi"
 
 
 @app.route('/new', methods=['POST'])
