@@ -55,13 +55,16 @@ class EtherChain:
     return self.chain.last()
 
   def hash(self, block):
-    data = {
-      'index': str(block.index),
-      'timestamp': str(block.timestamp),
-      'transactions': str(block.transactions),
-      'proof': str(block.proof),
-      'previous_hash': str(block.previous_hash)
-    }
+    data = block
+    if isinstance(block, EtherBlock):
+      print("yes")
+      data = {
+        'index': str(block.index),
+        'timestamp': str(block.timestamp),
+        'transactions': str(block.transactions),
+        'proof': str(block.proof),
+        'previous_hash': str(block.previous_hash)
+      }
     block_string = json.dumps(data, sort_keys=True).encode()
     return hashlib.sha256(block_string).hexdigest()
   
@@ -80,16 +83,15 @@ class EtherChain:
   def valid_chain(self, chain):
     last_block = chain[0]
     curr = 1
+    print(last_block)
 
     while curr < len(chain):
       # chain is a linked list
-      block = EtherBlock(last_block['index'], last_block['transactions'], last_block['proof'], last_block['previous_hash'],)
-      if chain[curr]['previous_hash'] != self.hash(block):
+      if chain[curr]['previous_hash'] != self.hash(last_block):
+        print("here")
         return False
       
-      last_block = curr_node
-      curr_node = curr_node.next_node
-    
+      last_block = chain[curr]
       curr += 1
 
     return True
@@ -98,13 +100,8 @@ class EtherChain:
   def resolve(self):
     neighbors = self.nodes
     found = None
-
-    print(neighbors)
     
     for node in neighbors:
-      print("HELLO")
-      print(node)
-      print("monkey")
       response = requests.get(f'{node}/chain')
       if response.status_code == 200:
         length = response.json()['length']
