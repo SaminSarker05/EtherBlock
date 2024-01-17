@@ -3,6 +3,7 @@ from time import time
 from uuid import uuid4
 import hashlib
 import json
+from urllib.parse import urlparse
 
 class EtherBlock:
   def __init__(self, index, transactions, proof, previous_hash):
@@ -20,8 +21,14 @@ class EtherChain:
   def __init__(self):
     self.chain = LinkedList()
     self.transactions = LinkedList()
+    self.nodes = set()
 
     self.new_block(proof = 100, previous_hash = 1)
+
+  def register_node(self, address):
+    parsed_url = urlparse(address)
+    self.nodes.add(parsed_url)
+
 
   def new_transaction(self, sender, recipient, amount):
     data = {
@@ -33,11 +40,13 @@ class EtherChain:
     print(self.last_block())
     return self.last_block().data.index + 1
 
+
   def new_block(self, proof, previous_hash = None):
     block = EtherBlock(len(self.chain) + 1, self.transactions, proof, previous_hash)
     self.transactions = LinkedList()
     self.chain.append(block)
     return block
+
 
   def last_block(self,):
     return self.chain.last()
