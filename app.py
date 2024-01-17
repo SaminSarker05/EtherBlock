@@ -23,7 +23,30 @@ def mineEther():
 @app.route('/chain', methods=['GET'])
 def seeChain():
   etherChain.chain.printList()
-  return "Hi"
+
+  blocks = []
+
+  for node in etherChain.chain:
+    block = node.data
+    transactions = block.transactions
+    ledger = []
+    for _ in transactions:
+      ledger.append(_.data)
+
+    des = {
+      "index": str(block.index),
+      "previous_hash": str(block.previous_hash),
+      "proof": str(block.proof),
+      "timestamp": str(block.timestamp),
+      "transactions": ledger,
+    }
+    blocks.append(des)
+
+  response = {
+    'chain': blocks,
+    'length': len(etherChain)
+  }
+  return jsonify(response)
 
 
 @app.route('/new', methods=['POST'])

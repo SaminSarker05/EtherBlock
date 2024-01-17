@@ -41,3 +41,9 @@ class LinkedList:
 
   def last(self):
     return self.tail
+
+  def __iter__(self):
+    cursor = self.head
+    while cursor:
+      yield cursor
+      cursor = cursor.next_node

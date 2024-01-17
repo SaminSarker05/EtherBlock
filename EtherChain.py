@@ -25,6 +25,10 @@ class EtherChain:
 
     self.new_block(proof = 100, previous_hash = 1)
 
+
+  def __len__(self):
+    return len(self.chain)
+
   def register_node(self, address):
     parsed_url = urlparse(address)
     self.nodes.add(parsed_url)
@@ -74,4 +78,29 @@ class EtherChain:
     guess_hash = hashlib.sha256(test).hexdigest()
     return guess_hash[:4] == "0000"
 
-test = EtherChain()
+  def valid_chain(self, chain):
+    last_block = chain.head
+    curr = 1
+    curr_node = chain.head.next_node
+
+    while curr < len(chain):
+      # chain is a linked list
+
+      if curr_node.data.previous_hash != self.hash(last_block.data.proof):
+        return False
+      
+      last_block = curr_node
+      curr_node = curr_node.next_node
+    
+      curr += 1
+
+    return True
+
+
+  # def consensus_algo(self):
+  #   neighbors = self.nodes
+    
+  #   for node in neighbors:
+  #     response = requests.get(f'http://{node}/chain')
+  #     if response.status_code == 200:
+  #       length = response.
