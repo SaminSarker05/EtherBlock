@@ -7,8 +7,7 @@ etherChain = EtherChain()
 
 @app.route('/mine', methods=['GET'])
 def mineEther():
-  last_block = etherChain.last_block().data
-  # need to convert transactions linked list into a normal list
+  last_block = etherChain.last_block().data  
   last_proof = last_block.proof
   new_proof = etherChain.poW(last_block)
 
@@ -34,18 +33,14 @@ def seeChain():
   for node in etherChain.chain:
     block = node.data
     transactions = block.transactions
-    ledger = []
-    for _ in transactions:
-      ledger.append(_.data)
 
     des = {
       "index": str(block.index),
       "timestamp": str(block.timestamp),
-      "transactions": ledger,
+      "transactions": transactions,
       "proof": str(block.proof),
       "previous_hash": str(block.previous_hash),
     }
-    print("changes")
     blocks.append(des)
 
   response = {

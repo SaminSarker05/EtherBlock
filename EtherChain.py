@@ -21,10 +21,13 @@ class EtherBlock:
 class EtherChain:
   def __init__(self):
     self.chain = LinkedList()
-    self.transactions = LinkedList()
+    self.transactions = []
     self.nodes = set()
 
     self.new_block(proof = 100, previous_hash = 1)
+
+  def add(self, etherBlock):
+    self.chain.append(etherBlock)
 
 
   def __len__(self):
@@ -46,7 +49,7 @@ class EtherChain:
 
   def new_block(self, proof, previous_hash = None):
     block = EtherBlock(len(self.chain) + 1, self.transactions, proof, previous_hash)
-    self.transactions = LinkedList()
+    self.transactions = []
     self.chain.append(block)
     return block
 
@@ -116,7 +119,10 @@ class EtherChain:
         print(length, chain)
 
         if length > len(self) and self.valid_chain(chain):
-          found = chain
+          found = LinkedList()
+          for block in chain:
+            etherBlock = EtherBlock(index=int(block['index']), transactions=block['transactions'], proof=block['proof'], previous_hash=block['previous_hash'], time=block['timestamp'])
+            found.append(etherBlock)
       
     if found:
       self.chain = found
