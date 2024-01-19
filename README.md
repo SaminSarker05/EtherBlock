@@ -63,5 +63,6 @@ Users can interact with the Ether blockchain through API endpoints, mine new blo
 ## Remarks
 
 - Default port is 5000. To change port append different number as such `python3 app.py NEW_PORT`
+- 4 leading zeroes results in a small computation time. More zeros exponentially increase mining duration
 
 
