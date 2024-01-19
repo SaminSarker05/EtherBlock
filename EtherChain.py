@@ -82,7 +82,7 @@ class EtherChain:
   def poW_validate(self, last_proof, proof):
     test = f'{last_proof}{proof}'.encode()
     guess_hash = hashlib.sha256(test).hexdigest()
-    return guess_hash[:4] == "0000"
+    return guess_hash[:4] == "00000"
 
 
   def valid_chain(self, chain):
