@@ -28,17 +28,20 @@ EtherChain is a lightweight blockchain implementation with a focus on simplicity
 
 1. Clone the repository:
    ```bash
-   git@github.com:SaminSarker05/EtherBlock.git
+   git clone git@github.com:SaminSarker05/EtherBlock.git
    ```
 2. Change into Project Directory:
    ```bash
    cd EtherBlock
    ```
-3. Change into Project Directory:
+3. Install Project Dependencies:
    ```bash
-   cd EtherBlock
+   pip install -r requirements.txt
    ```
-
+4. Start the Flask Application:
+   ```bash
+   python3 app.py
+   ```
 
 
 
