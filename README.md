@@ -1,6 +1,6 @@
 # EtherChain - The Best Blockchain
 
-EtherChain is a lightweight blockchain implementation with a focus on simplicity and clarity. Users can interact with the blockchain through API endpoints, mine new blocks, and participate in the consensus process. The project uses Flask for API development and the SHA-256 hash function. Multiple users can connect to the network and the consensus algorithm ensures the EtherChain's validity. Users can pass transactions to the public ledger and miners are awarded with EtherBlock.
+A lightweight blockchain implementation. Users can interact with the blockchain through API endpoints, mine new blocks, and participate in the consensus process. The project uses Flask for API development and the SHA-256 hash function. Multiple users can connect to the network and the consensus algorithm ensures the EtherChain's validity. Users can pass transactions to the public ledger and miners are awarded with EtherBlock.
 
 ## Features
 
@@ -42,6 +42,13 @@ EtherChain is a lightweight blockchain implementation with a focus on simplicity
    ```bash
    python3 app.py
    ```
+
+## Examples on Postman
+
+![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+
+![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+
 
 
 
