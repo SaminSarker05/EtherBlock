@@ -30,6 +30,10 @@ EtherChain is a lightweight blockchain implementation with a focus on simplicity
    ```bash
    git@github.com:SaminSarker05/EtherBlock.git
    ```
+2. Change into Project Directory:
+   ```bash
+   cd EtherBlock
+   ```
 3. Change into Project Directory:
    ```bash
    cd EtherBlock
