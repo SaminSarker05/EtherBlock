@@ -1,6 +1,6 @@
 # EtherChain - The Best Blockchain
 
-A lightweight blockchain implementation. Users can interact with the blockchain through API endpoints, mine new blocks, and participate in the consensus process. The project uses Flask for API development and the SHA-256 hash function. Multiple users can connect to the network and the consensus algorithm ensures the EtherChain's validity. Users can pass transactions to the public ledger and miners are awarded with EtherBlock.
+Users can interact with the Ether blockchain through API endpoints, mine new blocks, and participate in the consensus process. The project uses Flask for API development and the SHA-256 hash function. Multiple users can connect to the network and the consensus algorithm ensures the EtherChain's validity. Users can pass transactions to the public ledger and miners are awarded with EtherBlock.
 
 ## Features
 
@@ -62,10 +62,6 @@ A lightweight blockchain implementation. Users can interact with the blockchain 
 
 ## Remarks
 
-- Default port is 5000. To change port append different port to `python3 app.py NEW_PORT`
-- 
-
-
-
+- Default port is 5000. To change port append different number as such `python3 app.py NEW_PORT`
 
 
