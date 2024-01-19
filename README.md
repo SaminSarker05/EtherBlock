@@ -47,16 +47,23 @@ A lightweight blockchain implementation. Users can interact with the blockchain 
 
 - View entire blockchain with transactions
 <img src="https://github.com/SaminSarker05/EtherBlock/blob/main/images/chain.png" width=80%>
+
 - Mine a new block and add transactions
 <img src="https://github.com/SaminSarker05/EtherBlock/blob/main/images/mine.png" width=80%>
+
 - Register another node/user in network
 <img src="https://github.com/SaminSarker05/EtherBlock/blob/main/images/register.png" width=80%>
+
 - Write a new transaction to be added to next block
 <img src="https://github.com/SaminSarker05/EtherBlock/blob/main/images/new.png" width=80%>
+
 - Call consensus algorithm to validate EtherChain
 <img src="https://github.com/SaminSarker05/EtherBlock/blob/main/images/resolve.png" width=80%>
 
-## Notes
+## Remarks
+
+- Default port is 5000. To change port append different port to `python3 app.py NEW_PORT`
+- 
 
 
 
