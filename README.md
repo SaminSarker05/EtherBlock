@@ -12,9 +12,9 @@ A lightweight blockchain implementation. Users can interact with the blockchain 
 
 ## Technologies Used
 
-- `Flask`: API building
-- `Python`: Backend language for functions
-- `Postman`: Testing API endpoints
+- `Flask`: Python framework used for API building
+- `Python`: Backend language for functions and logic
+- `Postman`: API platform for endpoint testing
 
 ## API Endpoints
 
