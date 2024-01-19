@@ -27,9 +27,7 @@ EtherChain is a lightweight blockchain implementation with a focus on simplicity
 ## Getting Started
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/simpleproof-blockchain.git
-   cd simpleproof-blockchain
+   ```git clone https://github.com/your-username/simpleproof-blockchain.git```
 
 
 
