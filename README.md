@@ -45,7 +45,7 @@ A lightweight blockchain implementation. Users can interact with the blockchain 
 
 ## Examples on Postman
 
-![alt text](https://github.com/SaminSarker05/EtherBlock/blob/main/images/chain.png "chain" | width=100)
+![alt text](https://github.com/SaminSarker05/EtherBlock/blob/main/images/chain.png "chain" height="100")
 
 ![alt text](https://github.com/SaminSarker05/EtherBlock/blob/main/images/mine.png "mine")
 
@@ -54,6 +54,12 @@ A lightweight blockchain implementation. Users can interact with the blockchain 
 ![alt text](https://github.com/SaminSarker05/EtherBlock/blob/main/images/new.png "new")
 
 ![alt text](https://github.com/SaminSarker05/EtherBlock/blob/main/images/resolve.png "resolve")
+
+<img src="https://github.com/SaminSarker05/EtherBlock/blob/main/images/chain.png" height=100>
+<img src="https://github.com/SaminSarker05/EtherBlock/blob/main/images/mine.png" height=100>
+<img src="https://github.com/SaminSarker05/EtherBlock/blob/main/images/register.png" height=100>
+<img src="https://github.com/SaminSarker05/EtherBlock/blob/main/images/new.png" height=100>
+<img src="https://github.com/SaminSarker05/EtherBlock/blob/main/images/resolve.png" height=100>
 
 
 
