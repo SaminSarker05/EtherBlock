@@ -4,17 +4,25 @@ EtherChain is a lightweight blockchain implementation with a focus on simplicity
 
 ## Features
 
-- Blockchain with API endpoints: register (POST), mine (GET), chain (GET), new (POST), resolve (GET)
-- Proof of Work (5 leading zeroes): Miners must compete to generate a new hash with 5 leading zeros using the previous block's proof
-- Consensus Algorithm: Ensures the longest chain in the network with a valid EtherChain is shared amongst all nodes in the network
-- Peer-to-peer Connection: Uses consensus algorithm to allow decentralization of etherChain and sharing of ledger between user nodes
-- Transaction Data: Etherblock stores transaction data between users and previous Etherblock hashes to maintain a chain
+- `API endpoints`: register (POST), mine (GET), chain (GET), new (POST), resolve (GET)
+- `Proof of Work`: Miners compete to generate a new hash with 5 leading zeros using previous block's proof
+- `Consensus Algorithm`: Ensures the same valid EtherChain is shared amongst all nodes in the network
+- `Peer-to-peer Connection`: Allows decentralization of EtherChain and sharing of ledger amongst user nodes
+- `Transaction Data`: Etherblock stores transaction data between users
 
 ## Technologies Used
 
-- Flask: API building
-- Python: Backend language for functions
-- Postman: Testing API endpoints
+- `Flask`: API building
+- `Python`: Backend language for functions
+- `Postman`: Testing API endpoints
+
+## API Endpoints
+
+- `register`: POST - allows registration of nodes in network
+- `mine`: GET - mines a new block and adds to local chain
+- `new`: POST - new transaction data to be saved on next block
+- `chain`: GET - returns current chain and blocks with data
+- `resolve`: GET - uses consensus algo to check for changes
 
 ## Getting Started
 
