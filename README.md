@@ -45,9 +45,15 @@ A lightweight blockchain implementation. Users can interact with the blockchain 
 
 ## Examples on Postman
 
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+![alt text](https://github.com/SaminSarker05/EtherBlock/blob/main/images/chain.png "chain")
 
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+![alt text](https://github.com/SaminSarker05/EtherBlock/blob/main/images/mine.png "mine")
+
+![alt text](https://github.com/SaminSarker05/EtherBlock/blob/main/images/register.png "register")
+
+![alt text](https://github.com/SaminSarker05/EtherBlock/blob/main/images/new.png "new")
+
+![alt text](https://github.com/SaminSarker05/EtherBlock/blob/main/images/resolve.png "resolve")
 
 
 
