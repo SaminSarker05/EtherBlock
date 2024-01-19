@@ -55,11 +55,11 @@ A lightweight blockchain implementation. Users can interact with the blockchain 
 
 ![alt text](https://github.com/SaminSarker05/EtherBlock/blob/main/images/resolve.png "resolve")
 
-<img src="https://github.com/SaminSarker05/EtherBlock/blob/main/images/chain.png" height=100>
-<img src="https://github.com/SaminSarker05/EtherBlock/blob/main/images/mine.png" height=100>
-<img src="https://github.com/SaminSarker05/EtherBlock/blob/main/images/register.png" height=100>
-<img src="https://github.com/SaminSarker05/EtherBlock/blob/main/images/new.png" height=100>
-<img src="https://github.com/SaminSarker05/EtherBlock/blob/main/images/resolve.png" height=100>
+<img src="https://github.com/SaminSarker05/EtherBlock/blob/main/images/chain.png" width=100>
+<img src="https://github.com/SaminSarker05/EtherBlock/blob/main/images/mine.png" width=100>
+<img src="https://github.com/SaminSarker05/EtherBlock/blob/main/images/register.png" width=100>
+<img src="https://github.com/SaminSarker05/EtherBlock/blob/main/images/new.png" width=100>
+<img src="https://github.com/SaminSarker05/EtherBlock/blob/main/images/resolve.png" width=100>
 
 
 
