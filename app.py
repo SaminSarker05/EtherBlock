@@ -8,12 +8,14 @@ etherChain = EtherChain()
 @app.route('/mine', methods=['GET'])
 def mineEther():
   last_block = etherChain.last_block().data
+  # need to convert transactions linked list into a normal list
   last_proof = last_block.proof
   new_proof = etherChain.poW(last_block)
 
   etherChain.new_transaction(0, "Jack", 1)
   previous_hash = etherChain.hash(last_block)
   print("testing...", last_block)
+  # last_block is a etherblock
 
   block = etherChain.new_block(new_proof, previous_hash)
 
@@ -38,11 +40,12 @@ def seeChain():
 
     des = {
       "index": str(block.index),
-      "previous_hash": str(block.previous_hash),
-      "proof": str(block.proof),
       "timestamp": str(block.timestamp),
       "transactions": ledger,
+      "proof": str(block.proof),
+      "previous_hash": str(block.previous_hash),
     }
+    print("changes")
     blocks.append(des)
 
   response = {
@@ -111,3 +114,22 @@ if __name__ == '__main__':
       print("invalid port")
 
   app.run(debug = True, port = port)
+
+
+  """
+  testing:
+
+{
+    "sender": "samin",
+    "recipient": "postman",
+    "amount": 105
+}
+
+{
+    "nodes": ["http://127.0.0.1:5001"]
+}
+
+
+{'index': '1', 'previous_hash': '1', 'proof': '100', 'timestamp': '1705626761.936778', 'transactions': []}
+Index: 1, Timestamp: 1705626867.6664069, Transactions: <LinkedList.LinkedList object at 0x7f9ea87d0cd0>, Proof: 100, Previous Hash: 1
+  """

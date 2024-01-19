@@ -7,9 +7,9 @@ from urllib.parse import urlparse
 import requests
 
 class EtherBlock:
-  def __init__(self, index, transactions, proof, previous_hash):
+  def __init__(self, index, transactions, proof, previous_hash, time=time()):
     self.index = index
-    self.timestamp = time()
+    self.timestamp = time
     self.transactions = transactions
     self.proof = proof
     self.previous_hash = previous_hash
@@ -55,16 +55,16 @@ class EtherChain:
     return self.chain.last()
 
   def hash(self, block):
-    data = block
-    if isinstance(block, EtherBlock):
-      print("yes")
-      data = {
-        'index': str(block.index),
-        'timestamp': str(block.timestamp),
-        'transactions': str(block.transactions),
-        'proof': str(block.proof),
-        'previous_hash': str(block.previous_hash)
-      }
+
+    print("yes")
+    data = {
+      'index': str(block.index),
+      'timestamp': str(block.timestamp),
+      'transactions': str(block.transactions),
+      'proof': str(block.proof),
+      'previous_hash': str(block.previous_hash)
+    }
+    print(data)
     block_string = json.dumps(data, sort_keys=True).encode()
     return hashlib.sha256(block_string).hexdigest()
   
@@ -82,14 +82,19 @@ class EtherChain:
 
   def valid_chain(self, chain):
     last_block = chain[0]
-    print("testing...", last_block)
     curr = 1
     print(last_block)
+    # last_block is a dictionary
 
     while curr < len(chain):
+      testBlock = EtherBlock(index=int(last_block['index']), transactions=last_block['transactions'], proof=last_block['proof'], previous_hash=last_block['previous_hash'], time=last_block['timestamp'])
+
+      print(testBlock)
       # chain is a linked list
-      if chain[curr]['previous_hash'] != self.hash(last_block):
+      if chain[curr]['previous_hash'] != self.hash(testBlock):
         print("here")
+        print(chain[curr]['previous_hash'])
+        print(self.hash(testBlock))
         return False
       
       last_block = chain[curr]
@@ -104,6 +109,7 @@ class EtherChain:
     
     for node in neighbors:
       response = requests.get(f'{node}/chain')
+      print(response)
       if response.status_code == 200:
         length = response.json()['length']
         chain = response.json()['chain']
@@ -117,3 +123,7 @@ class EtherChain:
       return True
     
     return False
+
+
+# when mined last_block transactions is a linked list
+# when 
