@@ -1,5 +1,6 @@
 from EtherChain import *
 from flask import Flask, request, jsonify
+import sys 
 
 app = Flask(__name__)
 etherChain = EtherChain()
@@ -13,8 +14,6 @@ def mineEther():
 
   etherChain.new_transaction(0, "Jack", 1)
   previous_hash = etherChain.hash(last_block)
-  print("testing...", last_block)
-  # last_block is a etherblock
 
   block = etherChain.new_block(new_proof, previous_hash)
 
@@ -56,7 +55,6 @@ def transaction():
   required = ['sender', 'recipient', 'amount']
   for i in data:
     if i not in required:
-      print("missing values")
       return 'Missing Values', 400
   
   index = etherChain.new_transaction(data['sender'], data['recipient'], data['amount'])
@@ -95,9 +93,6 @@ def consensus():
   }
 
   return jsonify(response), 200
-  
-
-import sys 
 
 
 if __name__ == '__main__':
@@ -109,22 +104,3 @@ if __name__ == '__main__':
       print("invalid port")
 
   app.run(debug = True, port = port)
-
-
-  """
-  testing:
-
-{
-    "sender": "samin",
-    "recipient": "postman",
-    "amount": 105
-}
-
-{
-    "nodes": ["http://127.0.0.1:5001"]
-}
-
-
-{'index': '1', 'previous_hash': '1', 'proof': '100', 'timestamp': '1705626761.936778', 'transactions': []}
-Index: 1, Timestamp: 1705626867.6664069, Transactions: <LinkedList.LinkedList object at 0x7f9ea87d0cd0>, Proof: 100, Previous Hash: 1
-  """

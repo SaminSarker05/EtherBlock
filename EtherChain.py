@@ -23,8 +23,8 @@ class EtherChain:
     self.chain = LinkedList()
     self.transactions = []
     self.nodes = set()
-
     self.new_block(proof = 100, previous_hash = 1)
+
 
   def add(self, etherBlock):
     self.chain.append(etherBlock)
@@ -33,8 +33,10 @@ class EtherChain:
   def __len__(self):
     return len(self.chain)
 
+
   def register_node(self, address):
     self.nodes.add(address)
+
 
   def new_transaction(self, sender, recipient, amount):
     data = {
@@ -43,7 +45,6 @@ class EtherChain:
       'amount': amount
     }
     self.transactions.append(data)
-    # print(self.last_block())
     return self.last_block().data.index + 1
 
 
@@ -57,9 +58,8 @@ class EtherChain:
   def last_block(self,):
     return self.chain.last()
 
-  def hash(self, block):
 
-    print("yes")
+  def hash(self, block):
     data = {
       'index': str(block.index),
       'timestamp': str(block.timestamp),
@@ -67,10 +67,10 @@ class EtherChain:
       'proof': str(block.proof),
       'previous_hash': str(block.previous_hash)
     }
-    print(data)
     block_string = json.dumps(data, sort_keys=True).encode()
     return hashlib.sha256(block_string).hexdigest()
   
+
   def poW(self, last_proof):
     proof = 0
     while self.poW_validate(last_proof, proof) is False:
@@ -78,26 +78,21 @@ class EtherChain:
     
     return proof
   
+
   def poW_validate(self, last_proof, proof):
     test = f'{last_proof}{proof}'.encode()
     guess_hash = hashlib.sha256(test).hexdigest()
     return guess_hash[:4] == "0000"
 
+
   def valid_chain(self, chain):
     last_block = chain[0]
     curr = 1
-    print(last_block)
-    # last_block is a dictionary
 
     while curr < len(chain):
       testBlock = EtherBlock(index=int(last_block['index']), transactions=last_block['transactions'], proof=last_block['proof'], previous_hash=last_block['previous_hash'], time=last_block['timestamp'])
 
-      print(testBlock)
-      # chain is a linked list
       if chain[curr]['previous_hash'] != self.hash(testBlock):
-        print("here")
-        print(chain[curr]['previous_hash'])
-        print(self.hash(testBlock))
         return False
       
       last_block = chain[curr]
@@ -112,11 +107,9 @@ class EtherChain:
     
     for node in neighbors:
       response = requests.get(f'{node}/chain')
-      print(response)
       if response.status_code == 200:
         length = response.json()['length']
         chain = response.json()['chain']
-        print(length, chain)
 
         if length > len(self) and self.valid_chain(chain):
           found = LinkedList()
@@ -129,7 +122,3 @@ class EtherChain:
       return True
     
     return False
-
-
-# when mined last_block transactions is a linked list
-# when 
