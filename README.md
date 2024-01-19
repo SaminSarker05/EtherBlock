@@ -45,21 +45,11 @@ A lightweight blockchain implementation. Users can interact with the blockchain 
 
 ## Examples on Postman
 
-![alt text](https://github.com/SaminSarker05/EtherBlock/blob/main/images/chain.png "chain" height="100")
-
-![alt text](https://github.com/SaminSarker05/EtherBlock/blob/main/images/mine.png "mine")
-
-![alt text](https://github.com/SaminSarker05/EtherBlock/blob/main/images/register.png "register")
-
-![alt text](https://github.com/SaminSarker05/EtherBlock/blob/main/images/new.png "new")
-
-![alt text](https://github.com/SaminSarker05/EtherBlock/blob/main/images/resolve.png "resolve")
-
 <img src="https://github.com/SaminSarker05/EtherBlock/blob/main/images/chain.png" width=80%>
-<img src="https://github.com/SaminSarker05/EtherBlock/blob/main/images/mine.png" width=100>
-<img src="https://github.com/SaminSarker05/EtherBlock/blob/main/images/register.png" width=100>
-<img src="https://github.com/SaminSarker05/EtherBlock/blob/main/images/new.png" width=100>
-<img src="https://github.com/SaminSarker05/EtherBlock/blob/main/images/resolve.png" width=100>
+<img src="https://github.com/SaminSarker05/EtherBlock/blob/main/images/mine.png" width=80%>
+<img src="https://github.com/SaminSarker05/EtherBlock/blob/main/images/register.png" width=80%>
+<img src="https://github.com/SaminSarker05/EtherBlock/blob/main/images/new.png" width=80%>
+<img src="https://github.com/SaminSarker05/EtherBlock/blob/main/images/resolve.png" width=80%>
 
 
 
