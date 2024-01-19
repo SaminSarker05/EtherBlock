@@ -15,6 +15,7 @@ Users can interact with the Ether blockchain through API endpoints, mine new blo
 - `Flask`: Python framework used for API building
 - `Python`: Backend language for functions and logic
 - `Postman`: API platform for endpoint testing
+- `SHA-256`: Hash function for cryptographic hashes
 
 ## API Endpoints
 
