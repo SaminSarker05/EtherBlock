@@ -82,6 +82,7 @@ class EtherChain:
 
   def valid_chain(self, chain):
     last_block = chain[0]
+    print("testing...", last_block)
     curr = 1
     print(last_block)
 

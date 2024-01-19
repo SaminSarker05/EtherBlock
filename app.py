@@ -13,6 +13,7 @@ def mineEther():
 
   etherChain.new_transaction(0, "Jack", 1)
   previous_hash = etherChain.hash(last_block)
+  print("testing...", last_block)
 
   block = etherChain.new_block(new_proof, previous_hash)
 
