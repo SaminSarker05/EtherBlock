@@ -1,10 +1,14 @@
 from EtherChain import *
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import sys 
 
 app = Flask(__name__)
 etherChain = EtherChain()
 
+@app.route('/home', methods=['GET'])
+def home():
+  print("hello world")
+  return render_template('home.html')
 
 @app.route('/mine', methods=['GET'])
 def mineEther():
@@ -96,11 +100,4 @@ def consensus():
 
 
 if __name__ == '__main__':
-  port = 5000
-  if len(sys.argv) > 1:
-    try:
-      port = int(sys.argv[1])
-    except ValueError:
-      print("invalid port")
-
   app.run(debug = True, port = port)
