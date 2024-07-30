@@ -8,7 +8,6 @@ class Node:
     self.data = data
     self.next_node = None
 
-
   def __str__(self):
     return str(self.data)
 
@@ -19,11 +18,9 @@ class LinkedList:
     self.tail = None
     self.n = 0
   
-
   def __len__(self):
     return self.n
   
-
   def append(self, data):
     new_node = Node(data)
     if (self.head is None):
@@ -32,21 +29,16 @@ class LinkedList:
     else:
       self.tail.next_node = new_node
       self.tail = new_node
-
     self.n += 1
-
 
   def printList(self):
     cursor = self.head
     while (cursor):
       print(cursor.data, end=" -> ")
       cursor = cursor.next_node
-    print()
-
 
   def last(self):
     return self.tail
-
 
   def __iter__(self):
     cursor = self.head
