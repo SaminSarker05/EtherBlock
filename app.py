@@ -1,11 +1,14 @@
 from EtherChain import *
 from flask import Flask, request, jsonify, render_template
+from flask_cors import CORS
 import sys 
 
 app = Flask(__name__)
+CORS(app)
+
 etherChain = EtherChain()
 
-@app.route('/home', methods=['GET'])
+@app.route('/', methods=['GET'])
 def home():
   print("hello world")
   return render_template('home.html')
