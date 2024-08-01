@@ -45,7 +45,7 @@ class EtherChain:
     block = {
       'index': len(self.chain) + 1,
       'time': time(),
-      'transactions': self.Transactions,
+      'transactions': self.transactions,
       'proof': p,
       'previous_hash': prev_hash or self.hash(self.chain[-1])
     }
