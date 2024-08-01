@@ -13,6 +13,7 @@ def home():
   return render_template('home.html')
 
 
+# creates and appends a new block to blockchain with transactions
 @app.route('/mine', methods=['GET'])
 def mineEther():
   last_block = etherChain.last_block() 
@@ -33,22 +34,20 @@ def mineEther():
   return response
 
 
+# endpoint returns json of entire chain and recorded transactions
 @app.route('/chain', methods=['GET'])
 def seeChain():
-
   blocks = []
-  for node in etherChain.chain:
-    block = node.data
-    transactions = block.transactions
-
-    des = {
-      "index": str(block.index),
-      "timestamp": str(block.timestamp),
+  for block in etherChain.chain:
+    transactions = block['transactions']
+    desc = {
+      "index": str(block['index']),
+      "timestamp": str(block['time']),
       "transactions": transactions,
-      "proof": str(block.proof),
-      "previous_hash": str(block.previous_hash),
+      "proof": str(block['proof']),
+      "previous_hash": str(block['previous_hash']),
     }
-    blocks.append(des)
+    blocks.append(desc)
 
   response = {
     'chain': blocks,
@@ -57,6 +56,7 @@ def seeChain():
   return jsonify(response), 200
 
 
+# endpoint to add a transaction to the blockchain
 @app.route('/new', methods=['POST'])
 def transaction():
   data = request.get_json()
@@ -71,35 +71,33 @@ def transaction():
   return jsonify(response)
 
 
-# @app.route('/register', methods=['POST'])
-# def register():
-#   data = request.get_json()
-#   nodes = data.get('nodes')
-#   if nodes is None:
-#     return "Error", 400
+# endpoint to allow a user to add other users in their registry
+@app.route('/register', methods=['POST'])
+def register():
+  data = request.get_json() # parse json payload for use
+  nodes = data.get('nodes')
+  if nodes is None: return "Error", 400
   
-#   for node in nodes:
-#     etherChain.register_node(node)
+  # add each neighbor/user to our registry
+  for node in nodes: etherChain.register_node(node)
 
-#   response = {
-#     'message': "new nodes added",
-#     'nodes': nodes
-#   }
-#   return jsonify(response)
+  response = {
+    'message': "neighbor nodes added to registry",
+    'nodes': nodes
+  }
+  return jsonify(response), 200
+
+@app.route('/test', methods=['GET'])
+def test():
+  return jsonify(etherChain.valid_chain(etherChain.chain)), 200
 
 
-# @app.route('/resolve', methods=['GET'])
-# def consensus():
-#   change = etherChain.resolve()
-#   message = "not changed"
-#   if change:
-#     message = "chain was changed"
-  
-#   response = {
-#     'message': message
-#   }
-
-#   return jsonify(response), 200
+@app.route('/resolve', methods=['GET'])
+def consensus():
+  made_change = etherChain.resolve()
+  message = "not changed"
+  if made_change: message = "chain was changed"
+  return jsonify(message), 200
 
 
 if __name__ == '__main__':

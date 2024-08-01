@@ -20,7 +20,7 @@ class EtherChain:
   def __init__(self):
     self.chain = []
     self.transactions = []
-    self.nodes = set()
+    self.neighbors = set()
     self.new_block(p=100, prev_hash=1)
 
   def add(self, etherBlock):
@@ -28,9 +28,6 @@ class EtherChain:
 
   def __len__(self):
     return len(self.chain)
-
-  # def register_node(self, address):
-  #   self.nodes.add(address)
 
   def new_transaction(self, src, dest, amount):
     data = {
@@ -74,35 +71,43 @@ class EtherChain:
     guess_hash = hashlib.sha256(output).hexdigest()
     return guess_hash[:4] == "0000"
 
-  # def valid_chain(self, chain):
-  #   last_block = chain[0]
-  #   curr = 1
-  #   while curr < len(chain):
-  #     testBlock = EtherBlock(index=int(last_block['index']), transactions=last_block['transactions'], proof=last_block['proof'], previous_hash=last_block['previous_hash'], time=last_block['timestamp'])
-  #     if chain[curr]['previous_hash'] != self.hash(testBlock):
-  #       return False
-  #     last_block = chain[curr]
-  #     curr += 1
-  #   return True
+  def register_node(self, address):
+    # url_comp = urlparse(address) # returns a tuple of information
+    self.neighbors.add(address)
 
-  # def resolve(self):
-  #   neighbors = self.nodes
-  #   found = None
-    
-  #   for node in neighbors:
-  #     response = requests.get(f'{node}/chain')
-  #     if response.status_code == 200:
-  #       length = response.json()['length']
-  #       chain = response.json()['chain']
+  def valid_chain(self, chain):
+    last_block = chain[0]
+    ind = 1
+    while ind < len(chain):
+      print(f"{last_block}")
+      print(f"{chain[ind]}")
+      if chain[ind]['previous_hash'] != self.hash(last_block): return False
+      last_block = chain[ind]
+      ind += 1
+    return True
 
-  #       if length > len(self) and self.valid_chain(chain):
-  #         found = LinkedList()
-  #         for block in chain:
-  #           etherBlock = EtherBlock(index=int(block['index']), transactions=block['transactions'], proof=block['proof'], previous_hash=block['previous_hash'], time=block['timestamp'])
-  #           found.append(etherBlock)
-      
-  #   if found:
-  #     self.chain = found
-  #     return True
+  def resolve(self):
+    nei = self.neighbors
+    print('step1')
+    new_chain = None
+    print('step2')
+    our_length = len(self.chain)
+    print('step3')
+
+    for node in nei:
+      print(f"{node}/chain")
+      res = requests.get(f"{node}/chain")
+      print(res)
+      if res.status_code == 200:
+        length = res.json()['length']
+        chain = res.json()['chain']
+        if length > our_length and self.valid_chain(chain):
+          new_chain = chain
+          our_length = length
+    print('step4')
+
+    if new_chain != None:
+      self.chain = found
+      return True
     
-  #   return False
+    return False
