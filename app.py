@@ -22,6 +22,7 @@ def mineEther():
 
   etherChain.new_transaction(0, "Jack", 1)
   previous_hash = etherChain.hash(last_block)
+  print("hash", previous_hash)
 
   block = etherChain.new_block(new_proof, previous_hash)
 
@@ -42,7 +43,7 @@ def seeChain():
     transactions = block['transactions']
     desc = {
       "index": str(block['index']),
-      "timestamp": str(block['time']),
+      "timestamp": str(block['timestamp']),
       "transactions": transactions,
       "proof": str(block['proof']),
       "previous_hash": str(block['previous_hash']),
@@ -71,19 +72,18 @@ def transaction():
   return jsonify(response)
 
 
-# endpoint to allow a user to add other users in their registry
+# endpoint to allow a user to add other users to their registry
 @app.route('/register', methods=['POST'])
 def register():
   data = request.get_json() # parse json payload for use
-  nodes = data.get('nodes')
-  if nodes is None: return "Error", 400
-  
-  # add each neighbor/user to our registry
-  for node in nodes: etherChain.register_node(node)
+  node = data.get('node')
+  if node is None: return jsonify("error"), 400  
+  # add neighbor/user to our registry
+  etherChain.register_node(node)
 
   response = {
     'message': "neighbor nodes added to registry",
-    'nodes': nodes
+    'nodes': node
   }
   return jsonify(response), 200
 
